@@ -43,7 +43,8 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
    cd EcoWatt
 2. Install the dependencies using pip:
   ```bash
-  pip install -r requirements.txt
+   pip install -r requirements.txt
+
 3. Download the sample datasets (e.g., IMDELD, HIPE, HIPE) for training the model.
 
 
