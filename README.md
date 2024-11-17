@@ -46,16 +46,13 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
   pip install -r requirements.txt
 3. Download the sample datasets (e.g., IMDELD, HIPE, HIPE) for training the model.
 
-### Running the Project
-
-1. Launch the main energy monitoring and prediction system:
-   ```bash
-   python run_model.py
-
 
  
 
-
+Example Output
+Energy Prediction: A graph showing predicted vs actual energy consumption for specific machines.
+Load Disaggregation: Visual representation of total energy consumption disaggregated into different appliances.
+Efficiency Score: A score representing how efficient each machine is based on energy usage.
 
 
 
