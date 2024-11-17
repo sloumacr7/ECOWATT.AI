@@ -1,0 +1,13 @@
+/data
+├── raw_data                   # Raw energy consumption data files
+│   ├── IMDELD_dataset.csv     # Raw IMDELD data
+│   └── HIPE_dataset.csv       # Raw HIPE data
+├── processed_data             # Preprocessed data
+│   ├── IMDELD_cleaned.csv     # Cleaned IMDELD data
+│   └── HIPE_cleaned.csv       # Cleaned HIPE data
+├── models                     # Model-related data
+│   ├── train_data.csv         # Training data
+│   ├── test_data.csv          # Testing data
+│   ├── validation_data.csv    # Validation data
+│   └── model_performance.csv  # Model performance report
+└── README.md                  # Data description and usage instructions
