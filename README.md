@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoWatt: AI-driven Energy Management Solution</title>
-</head>
-<body>
-
-    <h1 align="center">EcoWatt: AI-driven Energy Management Solution</h1>
+ <h1 align="center">EcoWatt: AI-driven Energy Management Solution</h1>
 
     <p align="center"><em>Optimizing Energy Consumption for a Sustainable Future</em></p>
 
@@ -93,6 +84,3 @@
         <li>Thanks to the NILMTK and PyOD libraries for their support in non-intrusive load monitoring and anomaly detection, respectively.</li>
         <li>Thanks to the contributors and open-source community for their work on energy efficiency and sustainability research.</li>
     </ul>
-
-</body>
-</html>
