@@ -1,6 +1,7 @@
 # EcoWatt: AI-driven Energy Management Solution
 
 *Optimizing Energy Consumption for a Sustainable Future*
+
 ![462572902_1353126115656048_4448500756589272563_n](https://github.com/user-attachments/assets/3f675bca-3d46-4c6d-ab17-d55c8bad3065)
 
 ## Overview
@@ -25,6 +26,8 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
 - **Visualization**: Matplotlib, Plotly, Seaborn
 - **NILM Framework**: NILMTK for non-intrusive load monitoring
 - **Anomaly Detection**: PyOD for detecting anomalies in energy usage patterns
+
+![Capture d'écran 2024-11-14 184933](https://github.com/user-attachments/assets/b0dcda10-ea8f-415f-9107-706c88013a5e)
 
 ## Getting Started
 
