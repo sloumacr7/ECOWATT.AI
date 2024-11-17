@@ -44,10 +44,7 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
 2. Install the dependencies using pip:
   ```bash
    pip install -r requirements.txt
-Example Output
-Energy Prediction: A graph showing predicted vs actual energy consumption for specific machines.
-Load Disaggregation: Visual representation of total energy consumption disaggregated into different appliances.
-Efficiency Score: A score representing how efficient each machine is based on energy usage.
+
 
 
 
