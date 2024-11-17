@@ -41,6 +41,36 @@ def extract_features(data):
         }
     
     return features
+# Cartesian to Polar Transformation
+def cartesian_to_polar(x, y):
+    """
+    Converts Cartesian coordinates to Polar coordinates.
+
+    Parameters:
+    x (array-like): X-coordinates
+    y (array-like): Y-coordinates
+
+    Returns:
+    r (array-like): Radii
+    theta (array-like): Angles in radians
+    """
+    r = np.sqrt(np.square(x) + np.square(y))
+    theta = np.arctan2(y, x)
+    return r, theta
+    # Convert wavelet features to polar coordinates
+        approx_r, approx_theta = cartesian_to_polar(approximation, approximation)  # Approximation (using itself for demo)
+        detail_r, detail_theta = cartesian_to_polar(details, details)              # Details (using itself for demo)
+        harmonic_r, harmonic_theta = cartesian_to_polar(
+            np.array([harmonic_ratio]), np.array([harmonic_ratio])
+        )  # Harmonic ratio (simplified)
+
+        features[f'machine_{i}'] = {
+            'approximation_polar': (approx_r, approx_theta),
+            'details_polar': (detail_r, detail_theta),
+            'harmonic_ratio_polar': (harmonic_r, harmonic_theta)
+        }
+    
+    return features
 #Normalize the Time-Series Data
 def normalize_series(series):
     min_val = np.min(series)
