@@ -63,7 +63,6 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
     python app.py
     ```
 
-3. Access the dashboard on your browser at [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
 
 ## Contributing
 
@@ -90,9 +89,6 @@ We welcome contributions to improve the EcoWatt project! Whether you’re fixing
     ```
 6. Submit a pull request through GitHub!
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
