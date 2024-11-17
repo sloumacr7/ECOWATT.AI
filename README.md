@@ -41,8 +41,21 @@ EcoWatt is an advanced energy management solution designed to optimize energy co
    ```bash
    git clone https://github.com/your-username/EcoWatt.git
    cd EcoWatt
-2.Install the dependencies using pip:
+2. Install the dependencies using pip:
   ```bash
   pip install -r requirements.txt
+3. Download the sample datasets (e.g., IMDELD, HIPE, HIPE) for training the model.
+
+### Running the Project
+
+1. Launch the main energy monitoring and prediction system:
+   ```bash
+   python run_model.py
+
+
+ 
+
+
+
 
 
