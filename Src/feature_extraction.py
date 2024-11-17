@@ -41,3 +41,27 @@ def extract_features(data):
         }
     
     return features
+#Normalize the Time-Series Data
+def normalize_series(series):
+    min_val = np.min(series)
+    max_val = np.max(series)
+    return 2 * (series - min_val) / (max_val - min_val) - 1
+
+approx_norm = normalize_series(approximation)
+detail_norm = normalize_series(details)
+harmonic_norm = normalize_series(harmonic_ratio)
+#Convert Each Sequence to GAF Images
+def gaf_transform(series):
+    phi = np.arccos(series)  # Convert to polar coordinates
+    gaf = np.cos(phi[:, None] + phi[None, :])  # Create GAF matrix
+    return gaf
+
+approx_gaf = gaf_transform(approx_norm)
+detail_gaf = gaf_transform(detail_norm)
+harmonic_gaf = gaf_transform(harmonic_norm)
+#Combine GAF Images into an RGB Image
+# Stack GAF images into an RGB format
+rgb_image = np.stack([approx_gaf, detail_gaf, harmonic_gaf], axis=-1)
+
+# Optionally, convert to a format compatible with OpenCV or image processing libraries
+rgb_image = (rgb_image * 255).astype(np.uint8)  # Rescale for image format
