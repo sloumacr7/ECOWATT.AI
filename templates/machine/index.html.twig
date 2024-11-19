@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machine{% endblock %}
+
+{% block body %}
+<style>
+/* Custom styles for the container */
+.custom-container {
+    margin-left: 270px;
+}
+
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    padding: 16px; /* Increase padding for better readability */
+    text-align: left;
+    font-size: 14px; /* Slightly larger font */
+}
+
+.table th {
+    background-color: #f1f1f1;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.table td {
+    border-bottom: 1px solid #ddd;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row colors */
+}
+
+.table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.table td.text-danger {
+    color: #dc3545; /* Red color for critical severity */
+    font-weight: bold;
+}
+
+.table tr.critical {
+    background-color: #ffe6e6; /* Light red background for critical rows */
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+</style>
+
+
+
+<div class="container mt-4 custom-container">
+    <h1>Machine</h1>
+
+    <!-- Charts Section -->
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Voltage</h3>
+            <canvas id="voltageChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h3>Energy Consumption</h3>
+            <canvas id="energyChart"></canvas>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Frequency</h3>
+            <canvas id="frequencyChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h3>Amperage</h3>
+            <canvas id="amperageChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Alarms Section -->
+    
+       <div class="mt-4">
+    <h3>Alarms</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start Time</th>
+                <th>Type</th>
+                <th>Severity</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alarm in data.alarms %}
+                <tr>
+                    <td>{{ alarm.time }}</td>
+                    <td>{{ alarm.type }}</td>
+                    <td class="{% if alarm.severity == 'Critical' %}text-danger{% else %}text-warning{% endif %}">
+                        {{ alarm.severity }}
+                    </td>
+                    <td>{{ alarm.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Chart data
+    const voltageData = {{ data.voltage|json_encode|raw }};
+    const energyData = {{ data.energy|json_encode|raw }};
+    const frequencyData = {{ data.frequency|json_encode|raw }};
+    const amperageData = {{ data.amperage|json_encode|raw }};
+
+    // Voltage chart
+    new Chart(document.getElementById('voltageChart'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            datasets: [{
+                data: voltageData,
+                label: 'Voltage',
+                borderColor: 'green',
+                fill: false
+            }]
+        }
+    });
+
+    // Energy consumption chart
+    new Chart(document.getElementById('energyChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            datasets: [{
+                data: energyData,
+                label: 'Energy',
+                backgroundColor: 'blue'
+            }]
+        }
+    });
+
+    // Frequency chart
+    new Chart(document.getElementById('frequencyChart'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            datasets: [{
+                data: frequencyData,
+                label: 'Frequency',
+                borderColor: 'orange',
+                fill: false
+            }]
+        }
+    });
+
+    // Amperage chart
+    new Chart(document.getElementById('amperageChart'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            datasets: [{
+                data: amperageData,
+                label: 'Amperage',
+                borderColor: 'red',
+                fill: false
+            }]
+        }
+    });
+</script>
+{% endblock %}

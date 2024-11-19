@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forecast Chart{% endblock %}
+
+{% block body %}
+
+<div style=" margin-left: 270px; width: 80%; margin: auto;">
+    <canvas id="forecastChart"></canvas>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('forecastChart').getContext('2d');
+    const data = {
+        labels: [
+            '14/11 00:00', '14/11 12:00', '15/11 00:00', '15/11 12:00',
+            '16/11 00:00', '16/11 12:00', '17/11 00:00'
+        ],
+        datasets: [
+            {
+                label: 'Past Data',
+                data: [0, 8, 4, 6, 2, null, null],
+                borderColor: 'rgba(30, 136, 229, 1)',
+                backgroundColor: 'rgba(30, 136, 229, 0.2)',
+                borderWidth: 2,
+                pointRadius: 3,
+                fill: false
+            },
+            {
+                label: 'Forecast (Median)',
+                data: [null, null, null, null, 4, 6, 8],
+                borderColor: 'rgba(46, 125, 50, 1)',
+                borderDash: [5, 5],
+                borderWidth: 2,
+                pointRadius: 3,
+                fill: false
+            },
+            {
+                label: 'Confidence Interval (25th-75th Percentile)',
+                data: [null, null, null, null, 2, 4, 6],
+                borderWidth: 0,
+                backgroundColor: 'rgba(129, 199, 132, 0.3)',
+                fill: true,
+                pointRadius: 0
+            }
+        ]
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: 'Forecasts With Quantile Estimation',
+                font: { size: 16 }
+            },
+            subtitle: {
+                display: true,
+                text: 'Temperature / Time',
+                font: { size: 14 }
+            },
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time',
+                    font: { size: 12 }
+                },
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Temperature',
+                    font: { size: 12 }
+                },
+                min: -2,
+                max: 12
+            }
+        },
+        elements: {
+            line: {
+                tension: 0.3 // Makes the lines smooth
+            }
+        },
+        annotation: {
+            annotations: {
+                line1: {
+                    type: 'line',
+                    xMin: 4.5,
+                    xMax: 4.5,
+                    borderColor: 'rgba(0, 0, 0, 0.5)',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    label: {
+                        content: 'Future Horizon',
+                        enabled: true,
+                        position: 'start'
+                    }
+                }
+            }
+        }
+    };
+
+    new Chart(ctx, { type: 'line', data, options });
+</script>
+{% endblock %}

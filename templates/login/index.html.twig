@@ -1,0 +1,93 @@
+{% extends 'basef.html.twig' %}
+
+{% block body %}
+<style>
+/* Conteneur principal pour aligner logo et formulaire */
+.page-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 5%; /* Marges latérales */
+    min-height: 70vh; /* Assurez un bon alignement vertical */
+}
+
+
+/* Form styling */
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+}
+/* Logo styling */
+.logo-container img {
+    max-width: 500px; /* Taille du logo */
+    height: auto;
+ 
+     margin-right: 200px; 
+     margin-bottom: 200px;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #54a347;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #88cf31;
+}
+
+/* Styling pour le pied de page */
+footer {
+    position: relative; /* Permet au pied de page d'être plus bas */
+    bottom: -20px; /* Ajustez cette valeur selon vos besoins */
+    text-align: center;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+</style>
+
+<div class="page-container">
+    <!-- Section pour le logo -->
+    <div class="logo-container">
+        <img src="{{ asset('/logo1.png') }}" alt="Logo">
+    </div>
+
+    <!-- Section pour le formulaire -->
+    <div class="form-container">
+        <form action="{{ path('app_login') }}" method="post">
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password">
+            <br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

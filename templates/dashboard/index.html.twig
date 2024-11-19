@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Global View{% endblock %}
+
+{% block body %}
+<style>
+
+.container-fluid {
+    margin-left: 270px;
+}
+
+.card-body p, 
+.card-body small {
+    color: #222; /* Darker gray for better visibility */
+    font-size: 15px; /* Slightly increase size */
+    font-weight: 600; /* Bolder text for clarity */
+}
+
+/* Improve text clarity for events */
+ul {
+    list-style: none; /* Remove bullet points for a cleaner look */
+    padding-left: 0;
+}
+
+ul li {
+    color: #222; /* Use darker gray for better contrast */
+    font-size: 15px; /* Slightly larger font for readability */
+    font-weight: 500; /* Medium weight for better clarity */
+    line-height: 1.6; /* Increase line height for better spacing */
+}
+
+ul li strong {
+    color: #000; /* Make the status (e.g., 'Stopped', 'Pending') fully black for emphasis */
+    font-weight: 700; /* Bold for better visibility */
+}
+
+
+</style>
+<div class="container-fluid">
+    <div class="row">
+       
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <div class="row mt-4">
+                <!-- Stats Cards -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Company Name</h5>
+                            <p>{{ stats.locations }} Locations</p>
+                            <p>{{ stats.deployedDevices }} Deployed Devices</p>
+                            <p>{{ stats.onlineDevices }} Online Devices</p>
+                            <p>{{ stats.offlineDevices }} Offline Devices</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Consumption This Week</h5>
+                            <p>{{ consumptionData.thisWeek }} kWh</p>
+                            <small>Last Week: {{ consumptionData.lastWeek }} kWh</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Cost This Week</h5>
+                            <p>{{ costData.thisWeek }} TND</p>
+                            <small>Last Week: {{ costData.lastWeek }} TND</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>CO2 Emissions</h5>
+                            <p>{{ emissions.thisWeek }} kgCO2</p>
+                            <small>Last Week: {{ emissions.lastWeek }} kgCO2</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <canvas id="consumptionGraph"></canvas>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h5>Events</h5>
+                    <ul>
+                        {% for event in events %}
+                            <li>
+                                <strong>{{ event.status }}</strong>: {{ event.description }} ({{ event.date }})
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('consumptionGraph').getContext('2d');
+   new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ graphData.labels|json_encode|raw }},
+        datasets: [
+            {
+                label: 'Consumption',
+                data: {{ graphData.consumption|json_encode|raw }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Vibrant blue
+                borderColor: 'rgba(54, 162, 235, 1)', // Darker blue
+                borderWidth: 1
+            },
+            {
+                label: 'Cost',
+                data: {{ graphData.cost|json_encode|raw }},
+                backgroundColor: 'rgba(255, 99, 132, 0.6)', // Vibrant red
+                borderColor: 'rgba(255, 99, 132, 1)', // Darker red
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 14 // Slightly larger legend text
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                ticks: {
+                    color: '#333', // Darker gray for axis labels
+                    font: {
+                        size: 13 // Slightly larger axis labels
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#333', // Darker gray for axis labels
+                    font: {
+                        size: 13 // Slightly larger axis labels
+                    }
+                }
+            }
+        }
+    }
+});
+
+</script>
+{% endblock %}
